@@ -320,6 +320,7 @@ body {
 
   .hero__about {
     max-width: 17rem;
+    margin-bottom: 1.6rem;
   }
 
   .hero__sponsors {
