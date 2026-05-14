@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>summer hostels</title>
+    <meta
+      name="description"
+      content="summer hostels - affordable summers in rough rurals."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="is-gated">
+    <main class="hero" aria-label="summer hostels">
+      <video
+        id="background-video"
+        class="hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="sources/background_video.mp4" type="video/mp4">
+      </video>
+
+      <div
+        class="entry-gate"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="entry-title"
+      >
+        <div class="entry-gate__panel">
+          <h2 id="entry-title">summer hostels</h2>
+          <button class="entry-gate__button" type="button">
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M4 12.5h5.2L17 6v20l-7.8-6.5H4z"></path>
+              <path d="M22 11.5c1.3 1.2 2 2.8 2 4.5s-.7 3.3-2 4.5"></path>
+              <path d="M25 7.5c2.3 2.2 3.5 5.2 3.5 8.5S27.3 22.3 25 24.5"></path>
+            </svg>
+            <span>sound on</span>
+          </button>
+        </div>
+      </div>
+
+      <button
+        class="sound-toggle"
+        type="button"
+        aria-label="Turn video sound on"
+        aria-pressed="false"
+      >
+        <svg class="sound-toggle__icon sound-toggle__icon--off" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 12.5h5.2L17 6v20l-7.8-6.5H4z"></path>
+          <path d="m22 12 6 8"></path>
+          <path d="m28 12-6 8"></path>
+        </svg>
+        <svg class="sound-toggle__icon sound-toggle__icon--on" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 12.5h5.2L17 6v20l-7.8-6.5H4z"></path>
+          <path d="M22 11.5c1.3 1.2 2 2.8 2 4.5s-.7 3.3-2 4.5"></path>
+          <path d="M25 7.5c2.3 2.2 3.5 5.2 3.5 8.5S27.3 22.3 25 24.5"></path>
+        </svg>
+      </button>
+
+      <div class="hero__wash" aria-hidden="true"></div>
+
+      <section class="hero__center" aria-labelledby="page-title">
+        <h1 id="page-title">summer hostels</h1>
+        <p>a new concept to provide<br>affordable summers in rough<br>rurals</p>
+        <a href="mailto:contact@summerhostels.com">contact</a>
+      </section>
+
+      <footer class="hero__footer">
+        <p class="hero__about">
+          We are a growing group of architects<br>
+          locating abandoned sites and reactivating<br>
+          them with limited resources to provide<br>
+          affordable summer romance.
+        </p>
+
+        <div class="hero__sponsors" aria-label="sponsors">
+          <p>sponsored by</p>
+          <div class="hero__logos">
+            <img src="sources/vague.png" alt="VAGUE">
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      const video = document.querySelector("#background-video");
+      const entryGate = document.querySelector(".entry-gate");
+      const entryButton = document.querySelector(".entry-gate__button");
+      const soundToggle = document.querySelector(".sound-toggle");
+
+      const setSoundState = (soundOn) => {
+        video.muted = !soundOn;
+        video.volume = soundOn ? 1 : 0;
+        soundToggle.setAttribute("aria-pressed", String(soundOn));
+        soundToggle.setAttribute(
+          "aria-label",
+          soundOn ? "Turn video sound off" : "Turn video sound on"
+        );
+      };
+
+      setSoundState(false);
+      video.play().catch(() => {});
+
+      entryButton.addEventListener("click", async () => {
+        setSoundState(true);
+
+        try {
+          await video.play();
+        } catch {
+          setSoundState(false);
+        }
+
+        document.body.classList.remove("is-gated");
+        entryGate.hidden = true;
+        soundToggle.focus({ preventScroll: true });
+      });
+
+      soundToggle.addEventListener("click", async () => {
+        const shouldPlaySound = video.muted || video.volume === 0 || video.paused;
+        setSoundState(shouldPlaySound);
+
+        try {
+          await video.play();
+        } catch {
+          setSoundState(false);
+        }
+      });
+    </script>
+  </body>
+</html>
