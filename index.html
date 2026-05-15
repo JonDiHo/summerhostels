@@ -72,10 +72,34 @@
 
       <footer class="hero__footer">
         <p class="hero__about">
-          We are a growing group of architects<br>
-          locating abandoned sites and reactivating<br>
-          them with limited resources to provide<br>
-          affordable summer romance.
+          <span class="hero__about-copy hero__about-copy--default">
+            We are a growing group of architects<br>
+            from all over europe locating abandoned<br>
+            sites and reactivating them with limited<br>
+            resources to provide affordable summer<br>
+            romance.
+          </span>
+          <span class="hero__about-copy hero__about-copy--portrait">
+            We are a growing<br>
+            group of architects<br>
+            from all over europe<br>
+            locating abandoned<br>
+            sites and reactivating<br>
+            them with limited<br>
+            resources to<br>
+            provide affordable<br>
+            summer romance.
+          </span>
+          <span class="hero__about-copy hero__about-copy--compact">
+            We are a growing<br>
+            group of architects<br>
+            locating abandoned<br>
+            sites and reactivating<br>
+            them with limited<br>
+            resources to provide<br>
+            affordable summer<br>
+            romance.
+          </span>
         </p>
 
         <div class="hero__sponsors" aria-label="sponsors">
@@ -117,7 +141,6 @@
 
         document.body.classList.remove("is-gated");
         entryGate.hidden = true;
-        soundToggle.focus({ preventScroll: true });
       });
 
       soundToggle.addEventListener("click", async () => {
